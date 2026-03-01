@@ -1,0 +1,14 @@
+[
+  {
+    "name": "phone",
+    "label": "+380 97 665 53 73",
+    "href": "tel:+380976655373",
+    "ariaLabel": "іконка телефону"
+  },
+  {
+    "name": "mail",
+    "label": "kostiukyum@ukr.net",
+    "href": "mailto:kostiukyum@ukr.net",
+    "ariaLabel": "іконка пошти"
+  }
+]

@@ -1,0 +1,61 @@
+.section_hero {
+  background-image: url('/images/tablet/hero-2-tab.webp');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 480px 248px;
+  padding-top: 78px;
+  padding-bottom: 278px;
+}
+@media screen and (min-device-pixel-ratio: 2),
+  screen and (-moz-min-device-pixel-ratio: 2),
+  screen and (-o-min-device-pixel-ratio: 2/1),
+  screen and (-webkit-min-device-pixel-ratio: 2),
+  screen and (min-resolution: 192dpi),
+  screen and (min-resolution: 2dppx) {
+  .section_hero {
+    background-image: url('/images/tablet/hero-2-tab@2x.webp');
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .section_hero {
+    background-image: url('/images/desktop/hero-2-desk.webp');
+    background-size: auto 350px;
+    padding-bottom: 380px;
+  }
+  @media screen and (min-device-pixel-ratio: 2),
+    screen and (-moz-min-device-pixel-ratio: 2),
+    screen and (-o-min-device-pixel-ratio: 2/1),
+    screen and (-webkit-min-device-pixel-ratio: 2),
+    screen and (min-resolution: 192dpi),
+    screen and (min-resolution: 2dppx) {
+    .section_hero {
+      background-image: url('/images/desktop/hero-2-desk@2x.webp');
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .section_hero {
+    background-size: auto 440px;
+    padding-bottom: 475px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .section_hero {
+    position: relative;
+    background-size: auto 440px;
+    padding-bottom: 500px;
+  }
+
+  .section_hero::before {
+    content: '';
+    position: absolute;
+    top: 57.2%;
+    left: 0;
+    width: 100vw;
+    height: 2px;
+    background-color: #395734;
+  }
+}
