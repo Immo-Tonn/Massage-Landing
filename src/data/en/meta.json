@@ -1,0 +1,43 @@
+{
+  "_comment_title": "SEO title of the website. Replace later with the real massage studio name.",
+  "title": "Massage Studio – Relaxation & Wellness",
+
+  "_comment_description": "SEO description for Google. Later add city and specialization.",
+  "description": "Professional massage for deep relaxation, regeneration and overall wellbeing.",
+
+  "_comment_keywords": "SEO keywords. Later add city and specific services.",
+  "keywords": "massage, wellness massage, relaxation massage, massage studio",
+
+  "_comment_icons": "Favicon files.",
+  "icons": [
+    { "url": "/meta/favicon.ico" },
+    { "url": "/meta/favicon-16x16.png", "rel": "icon", "type": "image/png" },
+    { "url": "/meta/favicon-32x32.png", "rel": "icon", "type": "image/png" }
+  ],
+
+  "_comment_manifest": "Website manifest file.",
+  "manifest": "/meta/site.webmanifest",
+
+  "_comment_openGraph": "OpenGraph settings for social media previews.",
+  "openGraph": {
+    "type": "website",
+
+    "_comment_og_title": "Massage studio name.",
+    "title": "Massage Studio",
+
+    "_comment_og_description": "Short description for social networks.",
+    "description": "Professional massage treatments for relaxation and recovery.",
+
+    "_comment_og_siteName": "Brand or massage studio name.",
+    "siteName": "Massage Studio",
+
+    "_comment_og_images": [
+      {
+        "url": "/meta/opengraph-image.jpg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Massage Studio – Relaxation and Wellness"
+      }
+    ]
+  }
+}
