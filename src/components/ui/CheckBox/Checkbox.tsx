@@ -1,18 +1,43 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 
 import { classnames } from '@/utils/classnames';
-
 import { ModalPolicy } from '@/components/ui';
 
 import { CheckBoxProps } from './types';
 
-import contacts from '@/data/contacts.json';
+import { useLanguage } from '@/utils/LanguageContext';
+import { getData } from '@/utils/getData';
+
+interface ContactsData {
+  checkBox: {
+    name: string;
+    ariaLabel: string;
+    label: string;
+    conditionsLink: string;
+  };
+}
 
 export const CheckBox: React.FC<CheckBoxProps> = ({
   register,
   errors,
   checkboxInput,
 }) => {
+  const { lang } = useLanguage();
+  const [contacts, setContacts] = useState<ContactsData | null>(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await getData('contacts', lang);
+      setContacts(result);
+    };
+
+    loadData();
+  }, [lang]);
+
+  if (!contacts) return null;
+
   return (
     <>
       <label
@@ -35,8 +60,10 @@ export const CheckBox: React.FC<CheckBoxProps> = ({
             errors?.checkbox && 'border-error',
           )}
         />
+
         {contacts.checkBox.label}
       </label>
+
       <ModalPolicy nameBtn={contacts.checkBox.conditionsLink} variant="form" />
     </>
   );

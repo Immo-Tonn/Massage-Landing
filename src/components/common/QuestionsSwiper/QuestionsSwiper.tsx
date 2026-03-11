@@ -1,31 +1,46 @@
 'use client';
 
+import React, { useEffect, useState } from 'react';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y } from 'swiper/modules';
-
-import { QuestionsSlider } from '@/components/common';
-import { SliderButtonNext } from '@/components/ui';
-
-import dataImages from '@/data/questions.json';
-
 import 'swiper/css';
 
+import { QuestionsSlider } from '@/components/common/QuestionsSlider';
+import { SliderButtonNext } from '@/components/ui';
+
+import { useLanguage } from '@/utils/LanguageContext';
+import { getData } from '@/utils/getData';
+
+interface QuestionImage {
+  id: number;
+  img: string;
+  alt: string;
+  label: string;
+}
+
 export const QuestionsSwiper = () => {
+  const { lang } = useLanguage();
+  const [dataImages, setDataImages] = useState<QuestionImage[]>([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await getData('questionsSwiper', lang);
+      setDataImages(result);
+    };
+
+    loadData();
+  }, [lang]);
+
+  if (!dataImages.length) return null;
+
   return (
     <Swiper
-      className="relative"
-      modules={[A11y]}
-      initialSlide={1}
-      direction={'horizontal'}
-      loop={true}
-      a11y={{ enabled: true }}
+      spaceBetween={20}
+      slidesPerView={1}
       breakpoints={{
-        0: {
-          slidesPerView: 1,
-        },
         768: {
           slidesPerView: 2,
-          spaceBetween: 32,
+          spaceBetween: 30,
         },
         1280: {
           slidesPerView: 3,
@@ -33,11 +48,17 @@ export const QuestionsSwiper = () => {
         },
       }}
     >
-      {dataImages.map(({ id, img, alt, label }) => (
-        <SwiperSlide key={id}>
-          <QuestionsSlider key={id} id={id} img={img} alt={alt} label={label} />
+      {dataImages.map(item => (
+        <SwiperSlide key={item.id}>
+          <QuestionsSlider
+            id={item.id}
+            img={item.img}
+            alt={item.alt}
+            label={item.label}
+          />
         </SwiperSlide>
       ))}
+
       <SliderButtonNext />
     </Swiper>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { classnames } from '@/utils/classnames';
-
 import { FormInputProps } from './types';
 
 export const FormInput: React.FC<FormInputProps> = ({
@@ -18,10 +17,11 @@ export const FormInput: React.FC<FormInputProps> = ({
     <>
       <label
         htmlFor={name}
-        className="text mb-2 font-montserrat font-normal not-italic text-text"
+        className="mb-2 block font-montserrat text-sm text-[#e8d59c]"
       >
         {label} {isRequired?.value && '*'}
       </label>
+
       {textarea ? (
         <textarea
           id={name}
@@ -36,13 +36,13 @@ export const FormInput: React.FC<FormInputProps> = ({
               message: validation?.pattern ? validation?.pattern?.message : '',
             },
           })}
-          className="mb-3 h-24 resize-none bg-cardBcg px-4 py-3 font-montserrat text-base font-normal not-italic leading-5 tracking-[0.2px] text-text outline-none placeholder:opacity-[0.4] md:mb-4 xl:leading-6"
+          className="mb-4 h-28 w-full resize-none rounded-md border border-[#e8d59c] bg-[#2a1f18] px-4 py-3 font-montserrat text-base text-[#e8d59c] outline-none transition placeholder:text-[#bfae7a] focus:border-yellow-300 focus:shadow-[0_0_10px_rgba(250,204,21,0.5)]"
         />
       ) : (
         <input
           aria-required="true"
           aria-invalid={isError ? 'true' : 'false'}
-          aria-describedby={isError ? 'errorName' : undefined}
+          aria-describedby={isError ? `errorName${name}` : undefined}
           id={name}
           {...register(name, {
             ...validation,
@@ -68,16 +68,16 @@ export const FormInput: React.FC<FormInputProps> = ({
           })}
           placeholder={placeholder}
           className={classnames(
-            'bg-cardBcg px-4 py-3 font-montserrat text-base font-normal not-italic leading-5 tracking-[0.2px] outline-none placeholder:opacity-[0.4] xl:leading-6',
-            isError ? 'text-error' : 'text-text',
-            isError ? 'mb-0' : 'mb-8',
+            'w-full rounded-md border border-[#e8d59c] bg-[#2a1f18] px-4 py-3 font-montserrat text-base text-[#e8d59c] outline-none transition placeholder:text-[#bfae7a] focus:border-yellow-300 focus:shadow-[0_0_10px_rgba(250,204,21,0.5)]',
+            isError ? 'mb-0 border-error' : 'mb-6',
           )}
         />
       )}
+
       {isError && (
         <span
           id={`errorName${name}`}
-          className="mb-2 text-right font-montserrat text-xs leading-6 tracking-[0.2px] text-error"
+          className="mb-2 block text-right font-montserrat text-xs text-error"
         >
           {isError.message}
         </span>

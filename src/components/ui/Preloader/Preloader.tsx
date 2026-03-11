@@ -1,38 +1,65 @@
 'use client';
-import React, { useEffect, useState } from 'react';
 
+import React, { useEffect, useState } from 'react';
 import s from './Preloader.module.css';
 
-import { classnames } from '@/utils/classnames';
+import { useLanguage } from '@/utils/LanguageContext';
+import { getData } from '@/utils/getData';
 
-import data from '@/data/common.json';
+interface CommonData {
+  layout: {
+    logo: {
+      label: string;
+      preloaderSubtitle?: string;
+    };
+  };
+}
 
 export const Preloader = () => {
-  const { layout } = data;
-  const { logo } = layout;
+  const { lang } = useLanguage();
+
+  const [data, setData] = useState<CommonData | null>(null);
   const [show, setShow] = useState(true);
+  const [fade, setFade] = useState(false);
+
   useEffect(() => {
-    setTimeout(() => {
-      setShow(false);
+    const loadData = async () => {
+      const result = await getData('common', lang);
+      setData(result);
+    };
+
+    loadData();
+  }, [lang]);
+
+  useEffect(() => {
+    const fadeTimer = setTimeout(() => {
+      setFade(true);
     }, 1000);
+
+    const hideTimer = setTimeout(() => {
+      setShow(false);
+    }, 2500);
+
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(hideTimer);
+    };
   }, []);
 
-  if (!show) return null;
+  if (!show || !data) return null;
+
+  const { logo } = data.layout;
 
   return (
-    <div className="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-mainBcg">
-      <div>
-        <p
-          className={classnames(
-            s.gradient,
-            'section-title mb-4 text-center font-tenor',
-          )}
-        >
-          {logo.label}
-        </p>
-        <p className="text-center uppercase text-text">
-          {logo.preloaderSubtitle}
-        </p>
+    <div className={`${s.wrapper} ${fade ? s.fadeOut : ''}`}>
+      <div className={s.inner}>
+        <h1 className={s.logo}>{logo.label}</h1>
+
+        <div className={s.loader}>
+          <div className={s.orbit}>
+            <div className={s.spark}></div>
+          </div>
+        </div>
       </div>
     </div>
   );

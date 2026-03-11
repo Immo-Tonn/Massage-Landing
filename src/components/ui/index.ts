@@ -10,7 +10,7 @@ export * from './ModalError';
 export * from './ModalPolicy';
 export * from './ModalSuccess';
 export * from './Navbar';
-export * from './NavbarLink';
+
 export * from './Notification';
 export * from './Preloader';
 export * from './SliderButtonNext';

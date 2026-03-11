@@ -1,10 +1,26 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 
 import { ServicesList } from '@/components/common';
-
-import common from '@/data/common.json';
+import { useLanguage } from '@/utils/LanguageContext';
+import { getData } from '@/utils/getData';
 
 export const Services = () => {
+  const { lang } = useLanguage();
+  const [common, setCommon] = useState<any>(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await getData('common', lang);
+      setCommon(data);
+    };
+
+    loadData();
+  }, [lang]);
+
+  if (!common) return null;
+
   const servicesTitle = common.layout.titles.services;
 
   return (
@@ -13,6 +29,7 @@ export const Services = () => {
         <h2 className="section-title mb-10 font-tenor text-accent md:mb-12 xl:mb-[60px]">
           {servicesTitle}
         </h2>
+
         <ServicesList />
       </div>
     </section>

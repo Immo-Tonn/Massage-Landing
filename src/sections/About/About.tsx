@@ -1,31 +1,45 @@
-import React from 'react';
-import Image from 'next/image';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 
 import { AboutList } from '@/components/common';
-
-import about from '@/data/about.json';
+import { useLanguage } from '@/utils/LanguageContext';
+import { getData } from '@/utils/getData';
 
 export const About = () => {
+  const { lang } = useLanguage();
+  const [about, setAbout] = useState<any>(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await getData('about', lang);
+      setAbout(data);
+    };
+
+    loadData();
+  }, [lang]);
+
+  if (!about) return null;
+
   return (
-    <section id="about" className="w-full py-20 md:py-[120px] xl:py-40">
+    <section
+      id="about"
+      className="relative w-full py-20 md:py-[120px] xl:py-40"
+    >
+      {/* плавный переход между двумя видео */}
+      <div className="pointer-events-none absolute left-0 top-0 h-32 w-full bg-gradient-to-b from-black/70 to-transparent"></div>
+
       <div className="container">
-        <div className="flex flex-col md:flex-row mdOnly:gap-8">
-          <div className="mr-0 block h-[360px] self-stretch overflow-hidden md:h-full md:w-[240px] xl:mr-[136px] xl:w-[488px] smOnly:mb-10">
-            <Image
-              className="w-auto object-cover object-center md:h-[552px] md:object-left xl:h-[648px]"
-              src={about.image}
-              width={480}
-              height={648}
-              alt={about.alt}
-              priority
-            />
-          </div>
-          <div className="flex max-w-full flex-col md:max-w-[432px] xl:max-w-[592px] xl:justify-between">
-            <h2 className="section-subtitle mb-10 font-tenor text-accent md:mb-12 xl:mb-0">
-              {about.titleText}
-            </h2>
-            <AboutList aboutServices={about.services} />
-          </div>
+        {/* TITLE */}
+        <div className="mb-12 max-w-[720px]">
+          <h2 className="section-subtitle font-tenor text-accent">
+            {about.titleText}
+          </h2>
+        </div>
+
+        {/* LIST */}
+        <div className="max-w-[720px]">
+          <AboutList aboutServices={about.services} />
         </div>
       </div>
     </section>

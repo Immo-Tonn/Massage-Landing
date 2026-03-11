@@ -1,108 +1,106 @@
-# Psychologist Yulia Kostiuk
+# 💆 Massage Studio Landing Page
 
-Welcome to the online platform created to provide professional psychological
-support.
+![Next.js](https://img.shields.io/badge/Next.js-13-black?logo=next.js)
+![React](https://img.shields.io/badge/React-18-blue?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-38BDF8?logo=tailwind-css)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-### What we offer:
+Modern **multilingual landing page** for a massage studio built with **Next.js,
+TypeScript and Tailwind CSS**.
 
-- **Individual consultations**: You can contact Julia Kostiuk for individual
-  consultations, where she works with you one on one, helping unlock your
-  potential and understand your own needs and desires.
-
-- **Psychotherapeutic support**: Regardless of whether you are facing stress,
-  anxiety, depression or relationship problems, Julia will provide you effective
-  and caring psychotherapeutic support.
-
-- **Group Sessions**: If you want a more group dynamic, you can to join group
-  sessions, where Julia conducts various trainings and seminars.
+The website presents massage services, allows users to contact the studio
+through a form and includes required legal sections such as **Datenschutz** and
+**Impressum**.
 
 ---
 
-## 🗂️ Project description 🗂️
+# 🌐 Live Demo
 
-A website for the Psychologist Yulia Kostiuk.
+🚀 Coming soon
 
-- **Project name**: psychologist-yulia-kostyuk
+(Add production link after deployment)
 
-## ⚙️ Creating the project ⚙️
+---
 
-This project is a [Next.js](https://nextjs.org/) project bootstrapped with
-[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ✨ Features
 
-## Getting Started
+✔ Multilingual website (DE / EN / UA)  
+✔ Responsive design (mobile / tablet / desktop)  
+✔ Contact form with validation  
+✔ Modern UI and smooth UX  
+✔ Datenschutz & Impressum modals  
+✔ Clean component architecture  
+✔ SEO-friendly structure  
+✔ Optimized performance
 
-To run the application locally, follow these steps:
+---
 
-1. Clone the repository:
-   `git clone https://github.com/SoftRyzen-internship/psychologist-yulia-kostyuk.git`
-2. Install dependencies: `npm install`
-3. Run the app: `npm run dev`
-4. Open [http://localhost:3000](http://localhost:3000) in your browser (Note:
-   the port may be changed if 3000 port is occupied by another website).
+# 🛠 Tech Stack
 
-## Technologies Used
+### Frontend
 
-1. **Next.js:** is a robust React framework designed for building modern and
-   scalable web applications. It simplifies the development process by providing
-   a structured architecture, server-side rendering, and efficient routing.
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
 
-2. **Tailwind CSS:** is a utility-first CSS framework that significantly
-   expedites the process of designing and styling web interfaces. The
-   framework's modular and configurable nature aligns seamlessly with modern web
-   development practices.
+### Forms
 
-3. **Swiper:** is a cutting-edge, mobile-friendly touch slider that enhances
-   website with hardware-accelerated transitions and remarkable native behavior.
-   The slider component becomes a key element in providing users with an
-   immersive and interactive experience as they explore the various sections of
-   the site.
+- React Hook Form
 
-4. **TypeScript:** is a strict syntactical superset of JavaScript, introducing
-   optional static typing to the project. The optional static typing provides
-   additional clarity and documentation for the codebase, contributing to the
-   overall maintainability of the CarpTravel website.
+### Code Quality
 
-5. **React Hook Form:** is a library for managing form state in React
-   applications. It simplifies the process of building forms by providing a
-   flexible and efficient way to handle form validation, submission, and state
-   management. With React Hook Form, our website's forms are highly performant
-   and easy to maintain, ensuring a smooth user experience.
+- ESLint
+- Prettier
+- Husky (pre-commit hooks)
 
-6. **Sanity:** is a headless CMS (Content Management System) that offers a
-   highly customizable and intuitive interface for managing content. With
-   Sanity, content creators can easily add, edit, and organize content, while
-   developers benefit from its flexible API and powerful features such as
-   real-time collaboration and structured content models. Integrating Sanity
-   into our website allows us to maintain and update content seamlessly,
-   ensuring that our site remains dynamic and up-to-date with minimal effort.
+---
 
-### Features
+# 📦 Installation
 
-- **Optimization**: The website is optimized for fast loading, providing users
-  with quick access to information.
-- **Modularity and reusability**: The product is built using a component
-  approach, which makes the code modular and allows components to be used on
-  different pages and in different sections of the project. This simplifies the
-  maintenance of the site and the expansion of its functionality.
-- **Linters and formatting**: Using tools like Prettier and ESLint helps
-  maintain code standards, ensures a consistent style, and identifies potential
-  problems in the code.
-- **Adaptability**: The website is responsive, allowing you to create dynamic
-  and interactive user interfaces without reloading pages. This increases user
-  engagement and interaction.
-- **Convenient content management**: The content management system has an
-  intuitive interface that simplifies the process of updating and editing
-  content. You can easily make changes to texts, images and other content
-  without special knowledge in web development.
-- **Accessibility**:
-  - Intuitive design
-  - Semantic HTML
-  - Mobile-friendly interface
-  - Web resource available for any internet connection
+Clone the repository
 
-### Design
+````bash
 
-[Design layout on Figma](<https://www.figma.com/file/0jRQbr4RWvSRsL3UK2D6AV/Psychologist-(Yulia-Kostyuk)>)
+
+Install dependencies
+
+```bash
+npm install
+````
+
+Run development server
+
+```bash
+npm run dev
+```
+
+Open in browser
+
+```
+http://localhost:3000
+```
+
+---
+
+# 🚀 Build
+
+Create production build
+
+```bash
+npm run build
+```
+
+Run production server
+
+```bash
+npm run start
+```
+
+---
+
+# 📁 Project Structure
 
 ```
 
@@ -111,7 +109,7 @@ To run the application locally, follow these steps:
   |-- actions -> asynchronous functions that are executed on the server
   |-- app -> pages and routing
     |-- / --> routing group for main UI
-    |-- (admin) --> routing for sanity CMS
+
   |-- components -> folder with reusable components
     |-- common -> base sections/block components (accordion, form, slider, etc.)
     |-- ui -> small reusable components (button, modal, etc.)
@@ -138,112 +136,206 @@ To run the application locally, follow these steps:
 
 ```
 
-</details>
+---
 
-### Components API
+# 🌍 Localization
 
-Each component has its own API. You can find it in the component's folder. This
-is a list of more common components and their API.
+The website supports multiple languages:
 
-<details>
+- 🇩🇪 German
+- 🇬🇧 English
+- 🇺🇦 Ukrainian
 
-<summary><b>Base sections/block components (accordion, form, slider, etc.): </b></summary>
+Content is loaded dynamically using:
 
-<br/>
+```
+utils/getData.ts
+```
 
-- #### component Logo
+---
 
-| Prop        | Default | Description                                                         |
-| ----------- | ------- | ------------------------------------------------------------------- |
-| `path`      | --      | required, `string`. choose 'header' or 'footer'                     |
-| `onClick`   | --      | optional, `() => void`, add the function of closing the mobile-menu |
-| `className` | --      | optional, `string`, adds custom css class to the Logo               |
+# 📱 Responsive Design
 
-- #### component Socials
+The layout is optimized for:
 
-| Prop        | Default | Description                                              |
-| ----------- | ------- | -------------------------------------------------------- |
-| `className` | --      | optional, `string`, adds custom css class to the Socials |
+- mobile devices
+- tablets
+- desktops
 
-- #### component Button
+Built with a **mobile-first approach** using Tailwind CSS.
 
-| Prop         | Default     | Description                                                                  |
-| ------------ | ----------- | ---------------------------------------------------------------------------- |
-| `tag`        | --          | required, `string`, it can be either an 'a' or a 'button'.                   |
-| `accent`     | --          | required, `boolean`, should button have an accent style or not.              |
-| `children`   | --          | required, `ReactNode`                                                        |
-| `href`       | `undefined` | optional, `string`, specifies the URL of the link.                           |
-| `buttonType` | `button`    | optional, `string`, specifies the type of button.                            |
-| `onClick`    | `undefined` | optional, `() => void`, function is called when the button is clicked.       |
-| `disabled`   | `false`     | optional, `string`, if 'true', the button is disabled and cannot be clicked. |
-| `classname`  | `undefined` | optional, `string`, adds custom css class to the Button component.           |
+---
 
-- #### component Navbar
+# 🧾 Legal
 
-| Prop        | Default     | Description                                                            |
-| ----------- | ----------- | ---------------------------------------------------------------------- |
-| `variant`   | --          | required, `string`, it can be either 'header' or 'mobile-menu'.        |
-| `className` | `undefined` | optional, `string`, adds custom CSS classes to the Navbar component.   |
-| `onclick`   | `undefined` | optional, `() => void`, function is called when the Navbar is clicked. |
+The website includes legally required pages for German websites:
 
-- #### component NavbarLink
+- Datenschutz
+- Impressum
 
-| Prop      | Default     | Description                                                                |
-| --------- | ----------- | -------------------------------------------------------------------------- |
-| `title`   | --          | required, `string`, specifies the title of the NavbarLink.                 |
-| `href`    | --          | required, `string`, specifies the URL of the link.                         |
-| `variant` | --          | required, `string`, specifies the variant of the NavbarLink.               |
-| `onclick` | `undefined` | optional, `() => void`, function is called when the NavbarLink is clicked. |
+---
 
-- #### component BurgerMenu
+# 🧑‍💻 Author
 
-| Prop      | Default | Description                                                   |
-| --------- | ------- | ------------------------------------------------------------- |
-| `onClose` | --      | required, `() => void`, add the function of closing the modal |
-| `isOpen ` | --      | required, `boolean`, enables focus trap on opened burger menu |
+Developed by **Labrity Web Studio**
 
-- #### component Notification
+🌐 https://labrity.com
 
-| Prop   | Default | Description                                       |
-| ------ | ------- | ------------------------------------------------- |
-| `type` | --      | required, `sucess`, `error`, type of notification |
+---
 
-- #### component Modal
+# ⭐ Contributing
 
-| Prop        | Default | Description                                                   |
-| ----------- | ------- | ------------------------------------------------------------- |
-| `onClose`   | --      | required, `() => void`, add the function of closing the modal |
-| `children`  | --      | optional, `React.ReactNode`, React components                 |
-| `className` | --      | optional, `string`, adds custom css class to the Modal        |
+Pull requests are welcome.  
+For major changes please open an issue first.
 
-- #### component FooterItem
+---
 
-| Prop    | Default | Description                                                  |
-| ------- | ------- | ------------------------------------------------------------ |
-| `name`  | --      | required, `string`, specifies the name of the FooterItem.    |
-| `href`  | --      | required, `string`, specifies the URL of the link.           |
-| `ariaL` | --      | required, `string`, adds custom aria-label to the FooterItem |
+# 📄 License
 
-- #### component FormInput
+MIT License
 
-| Prop       | Default | Description                                                                       |
-| ---------- | ------- | --------------------------------------------------------------------------------- |
-| `config`   | --      | required, `FormInputsConfig`, config props - name, label, placeholder, validation |
-| `textarea` | --      | required, `boolean`, specifies if component input or textarea                     |
-| `register` | --      | required, `UseFormRegister`, register an input element and apply validation rules |
-| `errors`   | --      | optional, `object`, contains inputs' errors data                                  |
+## 🤖 Тестирование формы через Telegram-бота
 
-- #### component Checkbox
+Каждый разработчик может тестировать форму отправки сообщений через **своего
+Telegram-бота**.  
+Это нужно для того, чтобы тестовые сообщения **не отправлялись в основной бот
+проекта**.
 
-| Prop            | Default | Description                                                                       |
-| --------------- | ------- | --------------------------------------------------------------------------------- |
-| `register`      | --      | required, `UseFormRegister`, register an input element and apply validation rules |
-| `errors`        | --      | optional, `object`, contains inputs' errors data                                  |
-| `checkboxInput` | --      | optional, `string`                                                                |
+Следуйте инструкции ниже.
 
-- #### component ModalPolicy
+---
 
-| Prop      | Default | Description                                                |
-| --------- | ------- | ---------------------------------------------------------- |
-| `nameBtn` | --      | required, `string`, adds name of button in the ModalPolicy |
-| `variant` | --      | required, `string`, it can be either 'form' or 'footer'    |
+### 1️⃣ Создание Telegram-бота
+
+1. Откройте **Telegram**
+2. Найдите **@BotFather**
+3. Запустите бота командой:
+
+```
+/start
+```
+
+4. Создайте нового бота:
+
+```
+/newbot
+```
+
+5. Введите:
+
+- имя бота (например: `Massage Test Bot`)
+- username бота (например: `massage_test_bot`)
+
+После этого BotFather отправит вам **BOT TOKEN**, например:
+
+```
+123456789:AAExampleTokenExampleToken
+```
+
+Сохраните этот токен — он понадобится для `.env`.
+
+---
+
+### 2️⃣ Получение Chat ID
+
+1. Напишите **любое сообщение** вашему боту (например: `test`).
+
+2. Откройте в браузере:
+
+```
+https://api.telegram.org/botYOUR_BOT_TOKEN/getUpdates
+```
+
+Пример:
+
+```
+https://api.telegram.org/bot123456789:AAExampleTokenExampleToken/getUpdates
+```
+
+3. В ответе найдите поле:
+
+```
+"chat": {
+"id": 123456789
+}
+```
+
+Это число — ваш **CHAT_ID**.
+
+---
+
+### 3️⃣ Создание `.env.local`
+
+В **корне проекта** создайте файл:
+
+```
+.env.local
+```
+
+Добавьте туда данные вашего бота:
+
+```
+TELEGRAM_BOT_TOKEN=your_bot_token
+TELEGRAM_CHAT_ID=your_chat_id
+```
+
+Пример:
+
+```
+TELEGRAM_BOT_TOKEN=123456789:AAExampleTokenExampleToken
+TELEGRAM_CHAT_ID=123456789
+```
+
+---
+
+### 4️⃣ Запуск проекта
+
+Запустите проект:
+
+```
+npm run dev
+```
+
+Откройте в браузере:
+
+```
+http://localhost:3000
+```
+
+Теперь при отправке **контактной формы** сообщение будет приходить **в ваш
+Telegram-бот**.
+
+---
+
+### ⚠️ Важно
+
+Файл `.env.local` **нельзя загружать в GitHub**.
+
+Проверьте, чтобы он был в `.gitignore`:
+
+```
+.env
+.env.local
+.env.*
+```
+
+---
+
+### 🧪 Как выглядит сообщение
+
+После отправки формы вы должны получить сообщение примерно такого вида:
+
+```
+Новая заявка с сайта
+
+Имя: John Doe
+Телефон: +49 123456789
+Сообщение: Хочу записаться на массаж
+```
+
+---
+
+### 🚀 Продакшн
+
+В production версии сайта бот будет подключён к **общей Telegram-группе
+команды**, чтобы все участники могли получать заявки с сайта.

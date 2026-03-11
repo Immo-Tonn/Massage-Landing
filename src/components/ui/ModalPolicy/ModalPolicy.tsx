@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-
+import { Impressum } from '@/components/common/Impressum';
 import { classnames } from '@/utils/classnames';
 
 import { Modal } from '@/components/ui';
