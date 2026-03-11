@@ -93,12 +93,14 @@
   width: 200px;
   height: 6px;
 
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 215, 0, 0.4),
-      rgba(255, 215, 0, 1),
-      rgba(255, 215, 0, 0.4),
-      transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.4),
+    rgba(255, 215, 0, 1),
+    rgba(255, 215, 0, 0.4),
+    transparent
+  );
 
   filter: blur(2px);
 

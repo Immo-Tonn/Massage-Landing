@@ -23,7 +23,9 @@ type EducationData = {
 export const Education = () => {
   const { lang } = useLanguage();
 
-  const [educationData, setEducationData] = useState<EducationData | null>(null);
+  const [educationData, setEducationData] = useState<EducationData | null>(
+    null,
+  );
   const [common, setCommon] = useState<any>(null);
 
   useEffect(() => {

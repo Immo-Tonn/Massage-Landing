@@ -1,4 +1,3 @@
-
 export type Cards = {
   subtitle: string;
   description: string;
