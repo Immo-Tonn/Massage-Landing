@@ -1,23 +1,83 @@
-import { QuestionsSwiper } from '@/components/common';
+'use client';
 
-import data from '@/data/common.json';
+import { useEffect, useState } from 'react';
+
+import { useLanguage } from '@/utils/LanguageContext';
+import { getData } from '@/utils/getData';
+
+type QuestionsData = {
+  title: string;
+  description: string;
+  words: string[];
+};
 
 export const Questions = () => {
-  const { title, description } = data.questionsSection;
+  const { lang } = useLanguage();
+  const [questions, setQuestions] = useState<QuestionsData | null>(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await getData('questions', lang);
+      setQuestions(data);
+    };
+
+    loadData();
+  }, [lang]);
+
+  if (!questions) return null;
+
+  const words = questions.words;
 
   return (
-    <section className="w-full bg-bgQuestions pb-6 pt-[80px] md:pb-[40px] md:pt-[120px] xl:pb-[80px] xl:pt-40">
-      <div className="container xl:flex xl:items-start xl:gap-10">
-        <div className="md:flex md:items-center md:justify-between xl:h-[300px] xl:flex-col xl:gap-[190px] notXL:mb-[60px]">
-          <h2 className="section-title flex flex-col items-start font-tenor text-white smOnly:mb-8">
-            <span>{title.label1}</span>
-            <span>{title.label2}</span>
-          </h2>
-          <p className="text font-montserrat text-white md:w-[224px] smOnly:mb-10">
-            {description}
-          </p>
+    <section className="w-full overflow-hidden pb-[100px] pt-[100px]">
+      <div className="container mb-16 text-center">
+        <h2 className="mb-6 font-tenor text-4xl text-accent md:text-5xl">
+          {questions.title}
+        </h2>
+
+        <p className="mx-auto max-w-[520px] text-white">
+          {questions.description}
+        </p>
+      </div>
+
+      {/* FIRST ROW */}
+
+      <div className="marquee">
+        <div className="marquee-track">
+          {words.map((word, index) => (
+            <span key={index} className="marquee-word text-accent">
+              {word}
+              <span className="mx-10 text-accent">•</span>
+            </span>
+          ))}
+
+          {words.map((word, index) => (
+            <span key={'dup' + index} className="marquee-word text-accent">
+              {word}
+              <span className="mx-10 text-accent">•</span>
+            </span>
+          ))}
         </div>
-        <QuestionsSwiper />
+      </div>
+
+      {/* SECOND ROW */}
+
+      <div className="marquee reverse mt-8">
+        <div className="marquee-track">
+          {words.map((word, index) => (
+            <span key={'row2' + index} className="marquee-word text-accent">
+              {word}
+              <span className="mx-10 text-accent">•</span>
+            </span>
+          ))}
+
+          {words.map((word, index) => (
+            <span key={'row2dup' + index} className="marquee-word text-accent">
+              {word}
+              <span className="mx-10 text-accent">•</span>
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );

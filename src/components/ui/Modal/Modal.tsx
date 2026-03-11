@@ -1,17 +1,33 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { classnames } from '@/utils/classnames';
-
 import CloseIcon from '@/../public/icons/close-icon.svg';
 
 import { ModalProps } from './types';
 
-import data from '@/data/common.json';
+import { useLanguage } from '@/utils/LanguageContext';
+import { getData } from '@/utils/getData';
+
+interface CommonData {
+  modal: {
+    ariaLabel: string;
+  };
+}
 
 export const Modal = ({ onClose, children, className }: ModalProps) => {
-  const { ariaLabel } = data.modal;
+  const { lang } = useLanguage();
+  const [data, setData] = useState<CommonData | null>(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await getData('common', lang);
+      setData(result);
+    };
+
+    loadData();
+  }, [lang]);
 
   useEffect(() => {
     const close = (e: KeyboardEvent) => {
@@ -19,9 +35,14 @@ export const Modal = ({ onClose, children, className }: ModalProps) => {
         onClose();
       }
     };
+
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
   }, [onClose]);
+
+  if (!data) return null;
+
+  const { ariaLabel } = data.modal;
 
   const OnBackDropClick = (e: React.MouseEvent<HTMLElement>) => {
     if (e.target === e.currentTarget) onClose();
@@ -46,6 +67,7 @@ export const Modal = ({ onClose, children, className }: ModalProps) => {
         >
           <CloseIcon width={24} height={24} />
         </button>
+
         {children}
       </div>
     </div>

@@ -1,13 +1,36 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useSwiper } from 'swiper/react';
 
 import IconSliderNext from '@/../public/icons/arrow.svg';
 
-import data from '@/data/common.json';
+import { useLanguage } from '@/utils/LanguageContext';
+import { getData } from '@/utils/getData';
+
+interface CommonData {
+  questionsSection: {
+    ariaLabel: string;
+  };
+}
 
 export const SliderButtonNext = () => {
   const swiper = useSwiper();
+  const { lang } = useLanguage();
+
+  const [data, setData] = useState<CommonData | null>(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await getData('common', lang);
+      setData(result);
+    };
+
+    loadData();
+  }, [lang]);
+
+  if (!data) return null;
+
   const { ariaLabel } = data.questionsSection;
 
   return (

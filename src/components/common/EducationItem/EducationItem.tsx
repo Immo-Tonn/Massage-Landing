@@ -1,7 +1,6 @@
 import React from 'react';
-
+import { motion } from 'framer-motion';
 import { classnames } from '@/utils/classnames';
-
 import { EducationItemProps } from './types';
 
 export const EducationItem: React.FC<EducationItemProps> = ({
@@ -9,19 +8,26 @@ export const EducationItem: React.FC<EducationItemProps> = ({
   isLast,
 }) => {
   return (
-    <li
+    <motion.li
       key={item.id}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false }}
+      transition={{ duration: 1, delay: item.id * 0.2 }}
       className={classnames(
-        'flex items-start justify-start border-t-[1px] border-solid border-border py-6 md:items-center md:py-[38px] xl:py-[42px] smOnly:flex-col',
+        'group grid grid-cols-1 gap-4 border-t border-white/20 py-6 transition md:grid-cols-[1fr_1fr] md:gap-12 md:py-8 xl:py-[42px]',
         {
-          'border-b-[1px] border-solid border-border': isLast,
+          'border-b border-white/20': isLast,
         },
       )}
     >
-      <h3 className="flex flex-1 font-tenor text-xl font-normal tracking-[0.5px] text-accent smOnly:mb-4">
+      <h3 className="font-tenor text-xl font-medium leading-snug tracking-[0.5px] text-accent">
         {item.subTitle}
       </h3>
-      <p className="text flex flex-1 font-montserrat">{item.description}</p>
-    </li>
+
+      <p className="font-montserrat text-sm leading-relaxed text-white/80 md:max-w-[420px] md:text-right">
+        {item.description}
+      </p>
+    </motion.li>
   );
 };

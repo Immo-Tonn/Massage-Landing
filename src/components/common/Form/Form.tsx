@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useFormPersist from 'react-hook-form-persist';
 
@@ -17,10 +17,15 @@ import {
 
 import { FormData } from './types';
 
-import common from '@/data/common.json';
-import contacts from '@/data/contacts.json';
+import { useLanguage } from '@/utils/LanguageContext';
+import { getData } from '@/utils/getData';
 
 export const Form = () => {
+  const { lang } = useLanguage();
+
+  const [common, setCommon] = useState<any>(null);
+  const [contacts, setContacts] = useState<any>(null);
+
   const {
     register,
     handleSubmit,
@@ -34,10 +39,24 @@ export const Form = () => {
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const [showErrorModal, setShowErrorModal] = useState<boolean>(false);
 
+  useEffect(() => {
+    const loadData = async () => {
+      const commonData = await getData('common', lang);
+      const contactsData = await getData('contacts', lang);
+
+      setCommon(commonData);
+      setContacts(contactsData);
+    };
+
+    loadData();
+  }, [lang]);
+
   useFormPersist('FormData', {
     watch,
     setValue,
   });
+
+  if (!common || !contacts) return null;
 
   const checkboxInput = watch(contacts.checkBox.name);
 
@@ -45,11 +64,15 @@ export const Form = () => {
     try {
       setIsLoading(true);
 
-      const message = `Ім'я: ${data.name} %0AТелефон: ${data.phone} %0A${data.message ? `Повідомлення: ${data.message}` : ''}`;
+      const message = `Ім'я: ${data.name} %0AТелефон: ${data.phone} %0A${
+        data.message ? `Повідомлення: ${data.message}` : ''
+      }`;
+
       await sendMessage(message);
 
       reset();
       window.sessionStorage.removeItem('FormData');
+
       setShowSuccessModal(true);
     } catch (error) {
       setShowErrorModal(true);
@@ -69,7 +92,7 @@ export const Form = () => {
         className="flex flex-col xl:w-[592px]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {contacts.inputs.map(item => (
+        {contacts.inputs.map((item: any) => (
           <FormInput
             key={item.name.label}
             textarea={item.name.textarea}
@@ -78,11 +101,13 @@ export const Form = () => {
             errors={errors}
           />
         ))}
+
         <CheckBox
           register={register}
           errors={errors}
           checkboxInput={checkboxInput}
         />
+
         <Button
           tag="button"
           buttonType="submit"
@@ -92,12 +117,14 @@ export const Form = () => {
           {!isLoading ? common.buttonsText.v3 : <Loader />}
         </Button>
       </form>
+
       {showSuccessModal && (
         <ModalSuccess
           isModalSuccessOpen={showSuccessModal}
           onClickCloseModal={onClickCloseModal}
         />
       )}
+
       {showErrorModal && (
         <ModalError
           isModalErrorOpen={showErrorModal}

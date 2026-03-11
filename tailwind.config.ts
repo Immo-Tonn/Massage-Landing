@@ -27,41 +27,56 @@ const config: Config = {
           xl: '2rem',
         },
       },
+
+      /**
+       * 🚨 УДАЛЕНО: bg-backdrop — причина прозрачного бургер-меню
+       * Если когда-нибудь понадобится, создадим другой класс.
+       */
       backgroundImage: {
-        backdrop: `linear-gradient(rgba(41, 41, 41, 0.40),rgba(41, 41, 41, 0.40))`,
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+
       content: {
         arrow: `url(/icons/arrow-right.svg)`,
       },
+
       fontFamily: {
         montserrat: ['var(--font-montserrat)'],
         tenor: ['var(--font-tenor)'],
       },
+
       fontSize: {
         medium: ['28px', '1.28'],
         lightLarge: ['32px', '1.25'],
         large: ['40px', '1.2'],
         extraLarge: ['56px', '1.14'],
       },
+
       colors: {
         mainBcg: '#E5E1D5',
         footerBcg: '#D6D0C5',
         cardBcg: '#FAF5ED',
-        bgQuestions: '#6A7A5F',
-        accent: '#395734',
-        text: '#292929',
+
+        // новая премиальная палитра
+        accent: '#ffe8a3',
+        hover: '#ffe8a3',
+        pressed: '#c8a44f',
+
+        border: 'rgba(216, 179, 106, 0.45)',
+        borderCheckbox: '#C8B79D',
+
+        transparentPressed: 'rgba(216, 179, 106, 0.18)',
+        transparentHover: 'rgba(216, 179, 106, 0.12)',
+
+        bgQuestions: 'rgba(216, 179, 106, 0.08)',
+
+        text: '#ffffff',
         error: '#CB3D3D',
-        hover: '#2C4228',
-        transparentPressed: 'rgba(41, 41, 41, 0.08)',
-        transparentHover: 'rgba(41, 41, 41, 0.04)',
-        pressed: '#21331F',
-        border: 'rgba(57, 87, 52, 0.30)',
-        borderCheckbox: '#91897F',
       },
     },
   },
   plugins: [require('@tailwindcss/typography'), require('tailwind-scrollbar')],
 };
+
 export default config;

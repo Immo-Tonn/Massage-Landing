@@ -1,76 +1,90 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui';
-
 import ArrowDown from '@/../public/icons/arrow-down.svg';
 
-import hero from '@/data/hero.json';
-import common from '@/data/common.json';
+import { useLanguage } from '@/utils/LanguageContext';
+import { getData } from '@/utils/getData';
 
 import styles from './Hero.module.css';
 
 export const Hero = () => {
-  const [isTablet, setIsTablet] = useState(false);
+  const { lang } = useLanguage();
+
+  const [hero, setHero] = useState<any>(null);
+  const [common, setCommon] = useState<any>(null);
 
   useEffect(() => {
-    const handleResize = () => {
-      const isMobileView = window.innerWidth < 1280;
-      setIsTablet(isMobileView);
-    };
-    handleResize();
+    const loadData = async () => {
+      const heroData = await getData('hero', lang);
+      const commonData = await getData('common', lang);
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
+      setHero(heroData);
+      setCommon(commonData);
     };
-  }, []);
+
+    loadData();
+  }, [lang]);
+
+  if (!hero || !common) return null;
 
   return (
     <section
-      className={`relative w-full pb-[78px] pt-[78px] md:pb-[122px] md:pt-[122px] xl:relative xl:pb-[262px] xl:pt-[234px] ${styles.section_hero}`}
+      className={`
+        relative min-h-screen w-full
+        pb-[140px] pt-[140px]
+        md:pb-[122px] md:pt-[122px]
+        xl:pb-[262px] xl:pt-[234px]
+        ${styles.section_hero}
+      `}
     >
-      <div className="container xl:pt-[110px]">
-        <p className="text mb-4 font-montserrat font-medium uppercase not-italic text-text md:text-base">
+      {/* Видео фон */}
+      <video
+        className="absolute inset-0 z-0 h-full w-full object-cover"
+        src="/videos/3998280-uhd_4096_2160_25fps.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+
+      {/* затемнение */}
+      <div className="absolute inset-0 z-[2] bg-black/35" />
+
+      {/* контент */}
+      <div className="container relative z-[3] xl:pt-[110px]">
+        <p className="mb-4 font-montserrat font-medium uppercase text-[rgba(255,245,225,0.92)] drop-shadow-[0_0_4px_rgba(0,0,0,0.45)] md:text-base">
           {hero.pretitle}
         </p>
-        <h1 className="mb-12 font-tenor text-large/[48px] font-normal tracking-[0.5px] text-accent md:mb-14 md:text-7xl/[84px] xl:mb-16 xl:w-[600px]">
+
+        <h1 className="mb-12 font-tenor text-large/[48px] font-normal tracking-[0.5px] text-[rgba(255,230,170,1)] drop-shadow-[0_0_6px_rgba(0,0,0,0.45)] md:mb-14 md:text-7xl/[84px] xl:mb-16 xl:w-[600px]">
           {hero.title}
         </h1>
-        <Button
-          tag="a"
-          accent={true}
-          href={hero.btnHeroHref}
-          className="w-full font-semibold focus-visible:bg-pressed md:w-[198px] md:text-base"
-        >
+
+        <Button tag="a" href={hero.btnHeroHref} className="mt-6" accent={false}>
           {common.buttonsText.v1}
         </Button>
       </div>
-      {isTablet ? (
-        <Image
-          className="mb-6 mt-[78px] aspect-video w-full object-cover object-top md:mb-10 md:mt-[122px] md:h-[480px]"
-          src="/images/tablet/hero-1-tab@2x.webp"
-          width={768}
-          height={480}
-          priority
-          alt={hero.altPhoto}
-        />
-      ) : (
-        <Image
-          className="absolute right-[calc(50%-720px)] top-[-11%] mt-[78px] h-[900px] w-auto object-cover"
-          src="/images/desktop/hero-1-desk@2x.webp"
-          width={600}
-          height={900}
-          priority
-          alt={hero.altPhoto}
-        />
-      )}
+
+      {/* стрелка вниз */}
       <ArrowDown
         aria-label={hero.ariaLabelIcon}
-        className="ml-auto mr-auto h-[36px] w-[36px] md:h-[44px] md:w-[44px] xl:mt-[365px] xl:h-[52px] xl:w-[52px]"
+        onClick={() => {
+          const section = document.getElementById('about');
+          section?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        className="
+          absolute bottom-[80px] left-1/2
+          z-[3]
+          h-[36px]
+          w-[36px] -translate-x-1/2
+          drop-shadow-[0_0_6px_rgba(255,230,150,0.9)]
+          md:bottom-[100px] md:h-[44px] md:w-[44px]
+          xl:bottom-[120px] xl:h-[52px] xl:w-[52px]
+          [&>path]:stroke-[rgba(255,230,150,0.95)]
+        "
       />
     </section>
   );

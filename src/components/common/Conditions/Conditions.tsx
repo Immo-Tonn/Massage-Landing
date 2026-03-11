@@ -1,43 +1,76 @@
-'use client';
-
-import { PortableText } from '@portabletext/react';
-import React, { useEffect, useState } from 'react';
-
-import { classnames } from '@/utils/classnames';
-
-import { getConditions } from '@/../sanity/request/conditionsRequest';
-
-import { Condition } from './types';
-
+import { useEffect, useState } from 'react';
+import type { Condition } from './types';
 import styles from './Conditions.module.css';
+import { classnames } from '@/utils/classnames';
 
 export const Conditions = () => {
   const [conditions, setConditions] = useState<Condition[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const conditionsData = await getConditions();
+    const conditionsData: Condition[] = [
+      {
+        _id: '1',
+        title: 'Terminvereinbarung',
+        description: [
+          {
+            children: [
+              { text: 'Termine werden nach vorheriger Vereinbarung gebucht.' },
+            ],
+          },
+        ],
+      },
+      {
+        _id: '2',
+        title: 'Pünktlichkeit',
+        description: [
+          {
+            children: [
+              { text: 'Bitte erscheinen Sie pünktlich zu Ihrem Termin.' },
+            ],
+          },
+        ],
+      },
+      {
+        _id: '3',
+        title: 'Stornierung',
+        description: [
+          {
+            children: [
+              {
+                text: 'Eine Terminabsage ist mindestens 24 Stunden vorher erforderlich.',
+              },
+            ],
+          },
+        ],
+      },
+    ];
 
-      setConditions(conditionsData);
-    };
-
-    fetchData();
+    setConditions(conditionsData);
   }, []);
 
   const conditionsClasses = classnames(
-    `scrollbar-thin scrollbar-thumb-[#395734] scrollbar-track-[#6A7A5F] overflow-y-scroll prose max-w-full font-montserrat overflow-x-hidden text-[14px] h-[320px] md:h-[450px] xl:h-[380px] font-normal not-italic leading-5 tracking-[0.2px] text-text xl:text-[16px] xl:leading-6 ${styles.list}`,
+    styles.conditions,
+    'scrollbar-thin scrollbar-thumb-[#395734] scrollbar-track-[#A7D7A5]',
+    'overflow-y-scroll prose max-w-full font-normal text-accent',
   );
 
   return (
-    <div className="h-[576px] md:h-[952px] xl:h-[864px]">
-      {conditions.map((condition, index) => (
-        <div key={index}>
-          <h3 className="section-subtitle mb-6 ml-auto mr-auto text-center font-tenor text-accent md:w-[450px] xl:mb-[60px] xl:w-[639px] xl:tracking-[0.5px]">
-            {condition.title}
-          </h3>
-          <div className={conditionsClasses}>
-            <PortableText key={index} value={condition.description} />
-          </div>
+    <div className={conditionsClasses}>
+      {conditions.map(item => (
+        <div key={item._id} className="mb-6">
+          <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+
+          {Array.isArray(item.description) && item.description.length > 0 && (
+            <div className="mt-2 text-white/80">
+              {item.description.map((block, index) => (
+                <p key={index}>
+                  {Array.isArray(block.children) && block.children.length > 0
+                    ? block.children[0].text || ''
+                    : ''}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </div>

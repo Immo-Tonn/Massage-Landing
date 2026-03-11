@@ -1,10 +1,3 @@
-# Psychologist Yulia Kostiuk
-
-Welcome to the online platform created to provide professional psychological
-support.
-
-### What we offer:
-
 - **Individual consultations**: You can contact Julia Kostiuk for individual
   consultations, where she works with you one on one, helping unlock your
   potential and understand your own needs and desires.
