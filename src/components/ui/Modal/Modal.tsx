@@ -44,19 +44,21 @@ export const Modal = ({ onClose, children, className }: ModalProps) => {
 
   const { ariaLabel } = data.modal;
 
-  const OnBackDropClick = (e: React.MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) onClose();
+  const onBackDropClick = (e: React.MouseEvent<HTMLElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
   const modalClasses = classnames(
-    'relative mx-auto flex flex-col w-[320px] bg-mainBcg shadow-md',
+    'relative mx-auto flex w-[320px] flex-col bg-mainBcg shadow-md',
     className,
   );
 
   return (
     <div
-      onClick={OnBackDropClick}
-      className="bg-backdrop fixed bottom-0 right-0 z-10 h-full w-full overscroll-none backdrop-blur-2xl"
+      onClick={onBackDropClick}
+      className="bg-backdrop fixed inset-0 z-[2000] flex items-center justify-center overscroll-none backdrop-blur-2xl"
     >
       <div className={modalClasses}>
         <button

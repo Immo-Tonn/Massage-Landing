@@ -65,7 +65,7 @@ export function Header() {
   return (
     <header
       className={classnames(
-        'fixed left-0 top-0 z-[999] w-full',
+        'fixed left-0 top-0 z-[50] w-full',
         'border-b border-yellow-200 backdrop-blur-2xl transition-all duration-700',
         hideHeader
           ? 'translate-y-[-100%] opacity-0'
