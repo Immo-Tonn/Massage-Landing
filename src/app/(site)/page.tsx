@@ -34,10 +34,7 @@ export default function Home() {
           playsInline
           className="absolute left-0 top-0 -z-10 h-full w-full object-cover"
         >
-          <source
-            src="/videos/3998272-uhd_2160_4096_25fps.mp4"
-            type="video/mp4"
-          />
+          <source src="/videos/page.mp4" type="video/mp4" />
         </video>
 
         {/* SECTIONS OVER VIDEO */}
