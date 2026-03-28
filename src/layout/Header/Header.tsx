@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { classnames } from '@/utils/classnames';
 import { Logo } from '@/components/ui/Logo';
 import { Navbar } from '@/components/ui/Navbar';
@@ -18,6 +18,8 @@ export function Header() {
   const [hideHeader, setHideHeader] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const lastScroll = useRef(0);
+
   useEffect(() => {
     const loadData = async () => {
       const data = await getData('common', lang);
@@ -28,24 +30,32 @@ export function Header() {
   }, [lang]);
 
   useEffect(() => {
-    let lastScroll = 0;
-
     const handleScroll = () => {
-      const current = window.scrollY;
+      const currentScroll = window.scrollY;
 
-      setScrolled(current > 50);
+      setScrolled(currentScroll > 50);
 
-      if (current > lastScroll && current > 150) {
+      const scrollDifference = Math.abs(currentScroll - lastScroll.current);
+
+      // игнорируем микро движения
+      if (scrollDifference < 6) return;
+
+      if (currentScroll > lastScroll.current && currentScroll > 120) {
+        // scroll down
         setHideHeader(true);
-      } else {
+      } else if (currentScroll < lastScroll.current) {
+        // scroll up
         setHideHeader(false);
       }
 
-      lastScroll = current;
+      lastScroll.current = currentScroll;
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const openMenu = () => {
@@ -66,10 +76,8 @@ export function Header() {
     <header
       className={classnames(
         'fixed left-0 top-0 z-[50] w-full',
-        'border-b border-yellow-200 backdrop-blur-2xl transition-all duration-700',
-        hideHeader
-          ? 'translate-y-[-100%] opacity-0'
-          : 'translate-y-0 opacity-100',
+        'border-b border-yellow-200 backdrop-blur-2xl transition-transform duration-300',
+        hideHeader ? '-translate-y-full' : 'translate-y-0',
         scrolled ? 'bg-black/20 py-6 shadow-xl' : 'bg-black/10 py-5',
       )}
     >
