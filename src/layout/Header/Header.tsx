@@ -10,10 +10,20 @@ import { BurgerMenu } from '@/components/ui/BurgerMenu';
 import { useLanguage } from '@/utils/LanguageContext';
 import { getData } from '@/utils/getData';
 
+// ✅ Тип вместо any
+type CommonData = {
+  layout?: {
+    'aria-label'?: {
+      burger?: string;
+      btnClose?: string;
+    };
+  };
+};
+
 export function Header() {
   const { lang, setLang } = useLanguage();
 
-  const [common, setCommon] = useState<any>(null);
+  const [common, setCommon] = useState<CommonData | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [hideHeader, setHideHeader] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -37,14 +47,11 @@ export function Header() {
 
       const scrollDifference = Math.abs(currentScroll - lastScroll.current);
 
-      // игнорируем микро движения
       if (scrollDifference < 6) return;
 
       if (currentScroll > lastScroll.current && currentScroll > 120) {
-        // scroll down
         setHideHeader(true);
       } else if (currentScroll < lastScroll.current) {
-        // scroll up
         setHideHeader(false);
       }
 
@@ -69,8 +76,6 @@ export function Header() {
   };
 
   const languages = ['ua', 'en', 'de'];
-
-  if (!common) return null;
 
   return (
     <header
@@ -117,7 +122,7 @@ export function Header() {
         {/* BURGER BUTTON */}
         <button
           onClick={openMenu}
-          aria-label={common.layout['aria-label'].burger}
+          aria-label={common?.layout?.['aria-label']?.burger || 'menu'}
           className="transition-all duration-300 hover:scale-125 active:scale-95 xl:hidden"
         >
           <BurgerMenuIcon width={32} height={32} />
