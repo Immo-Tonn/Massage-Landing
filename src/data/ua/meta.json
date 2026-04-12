@@ -1,0 +1,43 @@
+{
+  "_comment_title": "SEO заголовок сайту. Пізніше замінити на назву масажної студії.",
+  "title": "Massage Studio – Релаксація та відновлення",
+
+  "_comment_description": "SEO опис для Google. Пізніше додати місто та спеціалізацію.",
+  "description": "Професійний масаж для глибокого розслаблення, відновлення та гарного самопочуття.",
+
+  "_comment_keywords": "SEO ключові слова. Пізніше додати місто.",
+  "keywords": "масаж, wellness масаж, релаксація, масажна студія",
+
+  "_comment_icons": "Іконки сайту (favicon).",
+  "icons": [
+    { "url": "/meta/favicon.ico" },
+    { "url": "/meta/favicon-16x16.png", "rel": "icon", "type": "image/png" },
+    { "url": "/meta/favicon-32x32.png", "rel": "icon", "type": "image/png" }
+  ],
+
+  "_comment_manifest": "Файл маніфесту сайту.",
+  "manifest": "/meta/site.webmanifest",
+
+  "_comment_openGraph": "Налаштування OpenGraph для соцмереж.",
+  "openGraph": {
+    "type": "website",
+
+    "_comment_og_title": "Назва студії.",
+    "title": "Massage Studio",
+
+    "_comment_og_description": "Опис для соціальних мереж.",
+    "description": "Професійний масаж для релаксації та відновлення.",
+
+    "_comment_og_siteName": "Назва бренду.",
+    "siteName": "Massage Studio",
+
+    "_comment_og_images": [
+      {
+        "url": "/meta/opengraph-image.jpg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Massage Studio – релаксація та wellness"
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "_comment_title": "SEO Titel der Website. Später durch den echten Namen der Massagepraxis ersetzen.",
+  "title": "Massage Studio – Entspannung & Regeneration",
+
+  "_comment_description": "SEO Beschreibung für Google. Später Stadt und Spezialisierung hinzufügen.",
+  "description": "Professionelle Massage für Entspannung, Regeneration und Wohlbefinden. Individuelle Behandlungen für Körper und Geist.",
+
+  "_comment_keywords": "SEO Schlüsselwörter. Später Stadt hinzufügen.",
+  "keywords": "massage, wellness massage, entspannung, regeneration, massage studio",
+
+  "_comment_icons": "Favicon Dateien. Können später ersetzt werden.",
+  "icons": [
+    { "url": "/meta/favicon.ico" },
+    { "url": "/meta/favicon-16x16.png", "rel": "icon", "type": "image/png" },
+    { "url": "/meta/favicon-32x32.png", "rel": "icon", "type": "image/png" }
+  ],
+
+  "_comment_manifest": "Manifest Datei für PWA.",
+  "manifest": "/meta/site.webmanifest",
+
+  "_comment_openGraph": "OpenGraph Daten für Social Media Vorschau.",
+  "openGraph": {
+    "type": "website",
+
+    "_comment_og_title": "Name der Massagepraxis.",
+    "title": "Massage Studio",
+
+    "_comment_og_description": "Kurze Beschreibung der Dienstleistungen.",
+    "description": "Professionelle Massage für Entspannung und Regeneration.",
+
+    "_comment_og_siteName": "Name des Studios oder des Masseurs.",
+    "siteName": "Massage Studio",
+
+    "_comment_og_images": "Vorschaubild für Social Media.",
+    "images": [
+      {
+        "url": "/meta/og-new.jpg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Massage Studio – Entspannung und Wellness"
+      }
+    ]
+  }
+}

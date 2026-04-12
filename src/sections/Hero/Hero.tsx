@@ -43,7 +43,7 @@ export const Hero = () => {
       {/* Видео фон */}
       <video
         className="absolute inset-0 z-0 h-full w-full object-cover"
-        src="/videos/3998280-uhd_4096_2160_25fps.mp4"
+        src="/videos/hero.mp4"
         autoPlay
         muted
         loop

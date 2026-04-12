@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { classnames } from '@/utils/classnames';
 import { Logo } from '@/components/ui/Logo';
 import { Navbar } from '@/components/ui/Navbar';
@@ -10,13 +10,25 @@ import { BurgerMenu } from '@/components/ui/BurgerMenu';
 import { useLanguage } from '@/utils/LanguageContext';
 import { getData } from '@/utils/getData';
 
+// ✅ Тип вместо any
+type CommonData = {
+  layout?: {
+    'aria-label'?: {
+      burger?: string;
+      btnClose?: string;
+    };
+  };
+};
+
 export function Header() {
   const { lang, setLang } = useLanguage();
 
-  const [common, setCommon] = useState<any>(null);
+  const [common, setCommon] = useState<CommonData | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [hideHeader, setHideHeader] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const lastScroll = useRef(0);
 
   useEffect(() => {
     const loadData = async () => {
@@ -28,24 +40,29 @@ export function Header() {
   }, [lang]);
 
   useEffect(() => {
-    let lastScroll = 0;
-
     const handleScroll = () => {
-      const current = window.scrollY;
+      const currentScroll = window.scrollY;
 
-      setScrolled(current > 50);
+      setScrolled(currentScroll > 50);
 
-      if (current > lastScroll && current > 150) {
+      const scrollDifference = Math.abs(currentScroll - lastScroll.current);
+
+      if (scrollDifference < 6) return;
+
+      if (currentScroll > lastScroll.current && currentScroll > 120) {
         setHideHeader(true);
-      } else {
+      } else if (currentScroll < lastScroll.current) {
         setHideHeader(false);
       }
 
-      lastScroll = current;
+      lastScroll.current = currentScroll;
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const openMenu = () => {
@@ -60,31 +77,27 @@ export function Header() {
 
   const languages = ['ua', 'en', 'de'];
 
-  if (!common) return null;
-
   return (
     <header
       className={classnames(
         'fixed left-0 top-0 z-[50] w-full',
-        'border-b border-yellow-200 backdrop-blur-2xl transition-all duration-700',
-        hideHeader
-          ? 'translate-y-[-100%] opacity-0'
-          : 'translate-y-0 opacity-100',
+        'border-b border-yellow-200 backdrop-blur-2xl transition-transform duration-300',
+        hideHeader ? '-translate-y-full' : 'translate-y-0',
         scrolled ? 'bg-black/20 py-6 shadow-xl' : 'bg-black/10 py-5',
       )}
     >
-      <div className="container relative flex items-center justify-between xl:gap-[100px]">
+      <div className="container relative flex items-center justify-between nav:gap-[100px]">
         {/* LOGO */}
         <Logo path="header" onClick={closeMenu} />
 
         {/* NAVIGATION */}
         <Navbar
           variant="header"
-          className="hidden transition-all duration-300 xl:flex"
+          className="hidden transition-all duration-300 nav:flex"
         />
 
         {/* LANGUAGE SWITCHER */}
-        {/* <div className="relative hidden items-center font-montserrat text-[15px] tracking-[0.25em] xl:flex">
+        <div className="relative hidden items-center font-montserrat text-[15px] tracking-[0.25em] nav:flex">
           {languages.map((l, index) => (
             <div key={l} className="flex items-center">
               <button
@@ -104,13 +117,13 @@ export function Header() {
               )}
             </div>
           ))}
-        </div> */}
+        </div>
 
         {/* BURGER BUTTON */}
         <button
           onClick={openMenu}
-          aria-label={common.layout['aria-label'].burger}
-          className="transition-all duration-300 hover:scale-125 active:scale-95 xl:hidden"
+          aria-label={common?.layout?.['aria-label']?.burger || 'menu'}
+          className="transition-all duration-300 hover:scale-125 active:scale-95 nav:hidden"
         >
           <BurgerMenuIcon width={32} height={32} />
         </button>
